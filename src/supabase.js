@@ -376,3 +376,31 @@ export async function deleteEstudiante(id) {
 
   return { success: true, source: 'local' };
 }
+
+/**
+ * Se suscribe a cambios en tiempo real en la tabla de estudiantes (Supabase Realtime)
+ */
+export function subscribeToEstudiantesChanges(onChangeCallback) {
+  const client = getSupabase();
+  if (!client) return null;
+
+  try {
+    const channel = client
+      .channel('estudiantes_db_changes')
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'estudiantes' },
+        (payload) => {
+          if (typeof onChangeCallback === 'function') {
+            onChangeCallback(payload);
+          }
+        }
+      )
+      .subscribe();
+
+    return channel;
+  } catch (err) {
+    console.warn('Suscripción Realtime no disponible:', err);
+    return null;
+  }
+}

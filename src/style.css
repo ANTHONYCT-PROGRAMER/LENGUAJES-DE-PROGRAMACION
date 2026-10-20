@@ -1162,3 +1162,157 @@ body {
   color: var(--text-muted);
   font-size: 0.82rem;
 }
+
+/* ==========================================================================
+   Sortable Table Headers & Tools
+   ========================================================================== */
+.sortable-th {
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.15s ease;
+}
+
+.sortable-th:hover {
+  color: var(--brand-cyan);
+}
+
+.sort-icon {
+  font-size: 0.7rem;
+  margin-left: 0.3rem;
+  opacity: 0.6;
+}
+
+.sortable-th.active-sort {
+  color: var(--brand-cyan);
+}
+
+.sortable-th.active-sort .sort-icon {
+  opacity: 1;
+}
+
+/* Distribution / Analytics Bar */
+.analytics-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.analytics-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+  margin-bottom: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dist-bar-track {
+  display: flex;
+  height: 14px;
+  width: 100%;
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+  margin-bottom: 0.75rem;
+}
+
+.dist-segment {
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.dist-segment.sobresaliente { background: #10b981; }
+.dist-segment.notable { background: #38bdf8; }
+.dist-segment.regular { background: #fbbf24; }
+.dist-segment.desaprobado { background: #f43f5e; }
+
+.dist-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  font-size: 0.78rem;
+  font-family: var(--font-mono);
+}
+
+.dist-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.dist-color-box {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+}
+
+/* Print Only Document Format */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    background-image: none !important;
+    font-size: 10pt;
+  }
+
+  .site-header,
+  .hero-banner,
+  .layout-grid,
+  .search-box,
+  .filter-tabs,
+  .table-actions,
+  .site-footer,
+  .toast-container,
+  .modal-backdrop,
+  .btn,
+  .nav-controls {
+    display: none !important;
+  }
+
+  .container {
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+
+  .table-wrapper {
+    background: #ffffff !important;
+    border: 1px solid #000000 !important;
+    box-shadow: none !important;
+  }
+
+  .students-table th {
+    background: #f1f5f9 !important;
+    color: #000000 !important;
+    border: 1px solid #cbd5e1 !important;
+  }
+
+  .students-table td {
+    color: #000000 !important;
+    border: 1px solid #cbd5e1 !important;
+  }
+
+  .print-only-header {
+    display: block !important;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    border-bottom: 2px solid #000000;
+    padding-bottom: 0.75rem;
+  }
+
+  .print-only-signatures {
+    display: flex !important;
+    justify-content: space-around;
+    margin-top: 3.5rem;
+    text-align: center;
+  }
+}
+
+.print-only-header,
+.print-only-signatures {
+  display: none;
+}

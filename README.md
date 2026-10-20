@@ -16,9 +16,17 @@ Aplicativo web moderno para la gestión académica y registro de calificaciones 
 - **🏆 Cuadro de Honor y Ranking Académico**:
   - Reconocimiento automático al estudiante con la mayor calificación (1° puesto).
   - Podio de Honor con medallas (🥇 1° Puesto, 🥈 2° Puesto, 🥉 3° Puesto) y puestos correlativos en la tabla general.
+- **⚡ Sincronización en Tiempo Real (Supabase Realtime)**:
+  - Cambios reflejados de inmediato en todas las sesiones y dispositivos sin recargar la página.
+- **📊 Distribución Académica de Rendimiento**:
+  - Barra estadística por rangos: Sobresaliente (18-20), Notable (14-17), Regular (11-13) y Desaprobado (0-10).
+- **📥 Exportación a Excel / CSV**:
+  - Descarga del acta completa de calificaciones con codificación UTF-8 compatible con Microsoft Excel.
+- **🖨️ Impresión de Acta Oficial Académica (PDF)**:
+  - Formato membretado listo para impresión y firmado oficial de actas de notas.
 - **Visualizador Escalar Dinámico**: Barra de progreso con indicador de corte aprobatorio en la nota 11.
-- **Panel Estadístico (KPIs)**: Muestra el total de estudiantes, % de aprobados, % de desaprobados y promedio general del curso.
-- **Tabla con Operaciones CRUD**: Búsqueda en tiempo real por código o nombre, filtros por condición, edición y eliminación de registros.
+- **Panel Estadístico (KPIs)**: Muestra el total de estudiantes, % de aprobados, % de desaprobados, promedio general del curso y mejor estudiante.
+- **Tabla con Operaciones CRUD y Ordenación**: Ordenamiento dinámico por cualquier columna, búsqueda en tiempo real por código o nombre, filtros por condición, edición y modal de confirmación de eliminación.
 - **Persistencia en la Nube con Supabase**: Sincronización directa con PostgreSQL y Row Level Security (RLS).
 
 ---
