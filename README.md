@@ -13,6 +13,9 @@ Aplicativo web moderno para la gestión académica y registro de calificaciones 
 - **Condición Académica Automatizada**:
   - **`✓ APROBADO`**: Si el promedio final es mayor o igual a **11** ($\ge 11.00$).
   - **`✕ DESAPROBADO`**: Si el promedio final es menor a **11** ($< 11.00$).
+- **🏆 Cuadro de Honor y Ranking Académico**:
+  - Reconocimiento automático al estudiante con la mayor calificación (1° puesto).
+  - Podio de Honor con medallas (🥇 1° Puesto, 🥈 2° Puesto, 🥉 3° Puesto) y puestos correlativos en la tabla general.
 - **Visualizador Escalar Dinámico**: Barra de progreso con indicador de corte aprobatorio en la nota 11.
 - **Panel Estadístico (KPIs)**: Muestra el total de estudiantes, % de aprobados, % de desaprobados y promedio general del curso.
 - **Tabla con Operaciones CRUD**: Búsqueda en tiempo real por código o nombre, filtros por condición, edición y eliminación de registros.

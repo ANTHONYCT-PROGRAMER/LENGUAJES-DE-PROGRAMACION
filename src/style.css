@@ -241,6 +241,244 @@ body {
 .kpi-card.approved { --kpi-accent: var(--approved-color); }
 .kpi-card.failed { --kpi-accent: var(--failed-color); }
 .kpi-card.average { --kpi-accent: var(--brand-purple); }
+.kpi-card.top-student { 
+  --kpi-accent: #fbbf24; 
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.08), rgba(16, 24, 40, 0.85));
+  border-color: rgba(251, 191, 36, 0.25);
+}
+
+/* ==========================================================================
+   Cuadro de Honor & Ranking de Estudiantes
+   ========================================================================== */
+.ranking-banner {
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.12), rgba(14, 21, 36, 0.95) 70%);
+  border: 1px solid rgba(251, 191, 36, 0.35);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem 1.75rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 0 30px -10px rgba(251, 191, 36, 0.25);
+  position: relative;
+  overflow: hidden;
+}
+
+.ranking-banner::before {
+  content: '🏆';
+  position: absolute;
+  right: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 5.5rem;
+  opacity: 0.12;
+  pointer-events: none;
+}
+
+.ranking-banner-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.ranking-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.3rem 0.85rem;
+  border-radius: var(--radius-full);
+  background: rgba(251, 191, 36, 0.2);
+  border: 1px solid rgba(251, 191, 36, 0.5);
+  color: #fde047;
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.top-student-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  background: rgba(10, 16, 28, 0.7);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.5rem;
+}
+
+.top-student-info {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.top-medal-avatar {
+  width: 58px;
+  height: 58px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  display: grid;
+  place-items: center;
+  font-size: 2rem;
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.5);
+  border: 2px solid #fef08a;
+  flex-shrink: 0;
+}
+
+.top-student-name {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+}
+
+.top-student-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.35rem;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+}
+
+.top-student-score-box {
+  text-align: right;
+}
+
+.top-score-num {
+  font-family: var(--font-mono);
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: #fbbf24;
+  line-height: 1;
+  text-shadow: 0 0 15px rgba(251, 191, 36, 0.4);
+}
+
+.top-score-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 0.25rem;
+}
+
+/* Podio Top 3 */
+.podium-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.podium-item {
+  background: rgba(14, 21, 36, 0.75);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.15rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  transition: all 0.2s ease;
+}
+
+.podium-item:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.podium-item.rank-1 {
+  border-color: rgba(251, 191, 36, 0.4);
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.1), rgba(14, 21, 36, 0.85));
+}
+
+.podium-item.rank-2 {
+  border-color: rgba(203, 213, 225, 0.4);
+  background: linear-gradient(135deg, rgba(203, 213, 225, 0.08), rgba(14, 21, 36, 0.85));
+}
+
+.podium-item.rank-3 {
+  border-color: rgba(217, 119, 6, 0.35);
+  background: linear-gradient(135deg, rgba(217, 119, 6, 0.08), rgba(14, 21, 36, 0.85));
+}
+
+.podium-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.podium-medal {
+  font-size: 1.6rem;
+  flex-shrink: 0;
+}
+
+.podium-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.podium-name {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text-main);
+}
+
+.podium-code {
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+}
+
+.podium-avg {
+  font-family: var(--font-mono);
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: #fbbf24;
+}
+
+.podium-item.rank-2 .podium-avg { color: #e2e8f0; }
+.podium-item.rank-3 .podium-avg { color: #f59e0b; }
+
+/* Rank Badge in general table */
+.rank-badge {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.82rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.rank-badge.gold {
+  background: rgba(251, 191, 36, 0.15);
+  color: #fbbf24;
+  border: 1px solid rgba(251, 191, 36, 0.4);
+}
+
+.rank-badge.silver {
+  background: rgba(203, 213, 225, 0.15);
+  color: #cbd5e1;
+  border: 1px solid rgba(203, 213, 225, 0.35);
+}
+
+.rank-badge.bronze {
+  background: rgba(217, 119, 6, 0.15);
+  color: #f59e0b;
+  border: 1px solid rgba(217, 119, 6, 0.35);
+}
+
+.rank-badge.normal {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-muted);
+  border: 1px solid var(--border-subtle);
+}
 
 .kpi-label {
   font-size: 0.78rem;

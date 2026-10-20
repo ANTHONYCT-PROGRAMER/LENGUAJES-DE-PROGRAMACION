@@ -101,6 +101,11 @@ function renderApp() {
     ? (estudiantes.reduce((acc, curr) => acc + parseFloat(curr.promedio), 0) / total).toFixed(2)
     : '0.00';
 
+  // Ranking ordenado de mayor a menor calificación
+  const rankingEstudiantes = [...estudiantes].sort((a, b) => parseFloat(b.promedio) - parseFloat(a.promedio));
+  const topStudent = rankingEstudiantes.length > 0 ? rankingEstudiantes[0] : null;
+  const topThree = rankingEstudiantes.slice(0, 3);
+
   app.innerHTML = `
     <!-- Barra de Navegación -->
     <header class="site-header">
@@ -142,7 +147,7 @@ function renderApp() {
         <div class="hero-header">
           <div>
             <h1>Gestión Académica de <span class="gradient-text">Calificaciones</span></h1>
-            <p>Registra notas de 0 a 20 con cálculo automático de promedio y condición aprobatoria (≥ 11).</p>
+            <p>Registra notas de 0 a 20 con cálculo automático de promedio, ranking de honor y condición aprobatoria (≥ 11).</p>
           </div>
         </div>
 
@@ -171,7 +176,77 @@ function renderApp() {
             <div class="kpi-value" style="color: var(--brand-purple);">${promedioGeneral}</div>
             <div class="kpi-subtext">Escala vigesimal (0 - 20)</div>
           </div>
+
+          <!-- KPI de Mejor Estudiante -->
+          <div class="kpi-card top-student">
+            <div class="kpi-label">🏆 Mayor Calificación <span>🥇</span></div>
+            <div class="kpi-value" style="color: #fbbf24;">${topStudent ? parseFloat(topStudent.promedio).toFixed(2) : '—'}</div>
+            <div class="kpi-subtext" style="color: #fef08a; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+              ${topStudent ? `${topStudent.nombres} ${topStudent.apellidos}` : 'Sin estudiantes'}
+            </div>
+          </div>
         </div>
+
+        <!-- Cuadro de Honor y Ranking Destacado -->
+        ${topStudent ? `
+          <div class="ranking-banner">
+            <div class="ranking-banner-header">
+              <div>
+                <span class="ranking-badge-pill">🏆 Cuadro de Honor • Máxima Calificación</span>
+                <h2 style="font-size: 1.45rem; font-weight: 800; margin-top: 0.35rem; color: #ffffff;">
+                  Primer Puesto del Salón
+                </h2>
+              </div>
+              <div style="font-size: 0.85rem; color: #fde047; font-family: var(--font-mono); font-weight: 600;">
+                ★ Reconocimiento Académico SIS224 ★
+              </div>
+            </div>
+
+            <!-- Estudiante con Mayor Nota -->
+            <div class="top-student-card">
+              <div class="top-student-info">
+                <div class="top-medal-avatar">🥇</div>
+                <div>
+                  <div class="top-student-name">${topStudent.nombres} ${topStudent.apellidos}</div>
+                  <div class="top-student-meta">
+                    <span><strong>Código:</strong> ${topStudent.codigo}</span>
+                    <span>•</span>
+                    <span><strong>Curso:</strong> ${topStudent.curso || 'Lenguajes de Programación'}</span>
+                    <span>•</span>
+                    <span><strong>Desglose:</strong> N1: ${parseFloat(topStudent.nota1).toFixed(1)} | N2: ${parseFloat(topStudent.nota2).toFixed(1)} | N3: ${parseFloat(topStudent.nota3).toFixed(1)}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="top-student-score-box">
+                <div class="top-score-num">${parseFloat(topStudent.promedio).toFixed(2)}</div>
+                <div class="top-score-label">Promedio Más Alto / 20</div>
+              </div>
+            </div>
+
+            <!-- Podio de Honor (Top 3) -->
+            ${topThree.length > 1 ? `
+              <div class="podium-grid">
+                ${topThree.map((st, idx) => {
+                  const medal = idx === 0 ? '🥇' : idx === 1 ? '🥈' : '🥉';
+                  const rankName = idx === 0 ? '1° Puesto (Oro)' : idx === 1 ? '2° Puesto (Plata)' : '3° Puesto (Bronce)';
+                  return `
+                    <div class="podium-item rank-${idx + 1}">
+                      <div class="podium-left">
+                        <span class="podium-medal">${medal}</span>
+                        <div class="podium-details">
+                          <span class="podium-name">${st.nombres} ${st.apellidos}</span>
+                          <span class="podium-code">${st.codigo} • ${rankName}</span>
+                        </div>
+                      </div>
+                      <div class="podium-avg">${parseFloat(st.promedio).toFixed(2)}</div>
+                    </div>
+                  `;
+                }).join('')}
+              </div>
+            ` : ''}
+          </div>
+        ` : ''}
       </section>
 
       <!-- Grid Principal: Formulario y Monitor Reactivo de Calificación -->
@@ -490,10 +565,14 @@ function renderStudentsTable() {
     `;
   }
 
+  // Orden global para calcular el puesto en el ranking
+  const sortedGlobal = [...estudiantes].sort((a, b) => parseFloat(b.promedio) - parseFloat(a.promedio));
+
   return `
     <table class="students-table">
       <thead>
         <tr>
+          <th style="text-align: center;">Puesto</th>
           <th>Código</th>
           <th>Estudiante / Curso</th>
           <th style="text-align: center;">Nota 1</th>
@@ -508,8 +587,18 @@ function renderStudentsTable() {
         ${filtered.map(st => {
           const isApproved = st.condicion === 'APROBADO';
           const promNum = parseFloat(st.promedio).toFixed(2);
+          const rankPos = sortedGlobal.findIndex(e => e.id === st.id) + 1;
+          const rankHtml = rankPos === 1
+            ? `<span class="rank-badge gold">🥇 1° Puesto</span>`
+            : rankPos === 2
+            ? `<span class="rank-badge silver">🥈 2° Puesto</span>`
+            : rankPos === 3
+            ? `<span class="rank-badge bronze">🥉 3° Puesto</span>`
+            : `<span class="rank-badge normal">${rankPos}°</span>`;
+
           return `
             <tr>
+              <td style="text-align: center;">${rankHtml}</td>
               <td class="code-cell">${st.codigo}</td>
               <td>
                 <div class="student-name-cell">
